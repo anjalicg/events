@@ -5,7 +5,7 @@ class MainController < ApplicationController
   def alpha
     trusted_list = ["anjalicg2001@gmail.com", "sureshg.g@gmail.com"]
     case request.method
-      when :post:      
+      when :post
       if trusted_list.include?(params[:alpha][:email].downcase)
         puts "USer is in trusted list"
         else
