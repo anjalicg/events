@@ -1,0 +1,29 @@
+1. check new migration file for all new fields added
+3. Add a user setting to disable mail notification
+4. css
+5. handle email send errors using incoming mail handle.......New model for sending out mails
+7. Caching pages
+8. Calender format for events
+12. type of account, my account as admin
+12. All event field explanation inside the text field, clear onClick. 
+13. Store user preference for location in cookie/db and display events for that location
+14. Invite friends -. we wont spam ur frnds, or sell their contact details to anyone. since it is a social-networking site, it is only as good as the number of users.-> See if they are already signed up, before sending mails.
+15. Blank picture to upload
+16.  Weekly newsletter with summary of new events for the coming week for the selected city. Store selected user city in models as well as cookies.
+18. Salting and hashing password before storing -> Instead of this going to use ssl/maybe
+20. tweet this event to your followers
+22. All views I need to javascriptify
+24. voting and votes, if more than one person were accepted, populate a list as to who all needs a thumbs-up!!
+25. Delete and Edit collaborate text
+
+
+Enhancements:-
+1. Events by friends and friend list
+2. google maps kind of page to display the event dots by place, a whole world map
+3. Firefox chrome and ie extension
+4. google widget or desktop application
+5. android application
+6. People add private events
+7. credit card etc to pay for sponsored events
+8. waving the event timeline
+9. Add event to google calender, in case user is accepted. In the details give the wall link.

@@ -1,0 +1,35 @@
+events for today and tomorrow -> should it be events for today and this week? may be too huge
+
+
+"You must be logged in to access this page"
+Reject a response, should that option be there?
+Advertise with us-> best time to contact u along with timezone
+bottom tabs-> about, advertise with us, suggestions, contact us, technical team/details,blog/news/events
+domain name?
+top tabs->testimonials
+Find someone to write "About us"
+testing strategy?? how many people, how much to pay
+
+
+REPORT ABUSE -> should i send mail to the creator and other responders? 
+Bar user if 3 events have been tagged inappropriate?
+
+Calendar format of created and responded events., may be merge with google calender
+Add safety info (from orkut)
+Accept terms check and make them accept by using check boxes and validate terms in models?
+
+
+
+
+password getting saved in the form.
+
+send response when logged out
+application logging
+add Response text
+which field is mandatory in each form submit
+back link and home link fopr each thing
+
+
+
+
+

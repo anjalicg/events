@@ -1,0 +1,12 @@
+<% form_tag ({:action=>'edit'},:multipart=>true) do %>
+<p><label for="user_about"> About you: </label>
+<%= text_area :user, :about, :rows=>"2", :columns=>"1" %> </p>
+<p><label for="user_dob"> Date of Birth: </label>
+<%= date_select :user, :dob,:use_short_month=>true,:start_year=>1900,:date_separator=>"-",:order=>[:day,:month,:year],:end_year=>Time.now.year %> </p>
+<p><label for="user_interests"> Interests: </label>
+<%= text_area :user, :interests, :rows=>"2", :columns=>"1" %> </p>
+<p><label for="user_picture"> Upload Picture: </label>
+<%= file_field :user, 'pictureimg' %> </p>
+<%= submit_tag "Save Changes" %>
+<% end %>
+

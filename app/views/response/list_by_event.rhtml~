@@ -1,0 +1,23 @@
+<h3>Responses for <%= @event.title %></h3>
+<table>
+<tr><th>Sl no.</th><th>Response By</th><th>Response On</th><th>Accept?</th></tr>
+<% count = 1 %>
+<% @responses.each do |response|%>
+<tr>
+	<td><%= count %></td>
+	<td><%= link_to response.user.display_name, :controller=>'user',:action=>'user_home', :id=>response.user_id, :show_details=>true %> Email: <%= response.user.email%></td>
+	<td><%=response.created_at.strftime("%d%b,%Y at %I:%M %p") %></td>
+	<% unless response.accept %>
+	<% if response.event.user == session[:user] %>
+	<td><%= link_to "Accept", :controller=>'response',:action=>'accept',:response_id=>response.id, :event_id=>response.event_id %></td>
+	<% else %>
+	<td>No Response</td>
+	<% end %>
+	<% else %>
+	<td>Accepted</td>
+	<% end %>
+ 	<% count +=1 %>
+</tr>
+	
+<% end %>
+</table>

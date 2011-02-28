@@ -1,0 +1,5 @@
+<strong>Plan event/ Collaborate:</strong><br/>
+<% form_tag :controller=>'wallentry', :action=>'new', :event_id=>params[:id] do%>
+<%= text_area :wallentry, :entry_text,:rows=>4,:columns=>8 %><br/>
+<%= submit_tag "Submit" %>
+<% end %>

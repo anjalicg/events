@@ -1,0 +1,35 @@
+<h3>You responded to the following events</h3>
+<table>
+<tr><th>Sl no.</th><th>Event Title</th><th>Created By</th><th>Accepted?</th><th>Event time</th></tr>
+<% count =1%>
+<% @responses.each do |response| %>
+<% if response.event %>
+<% if response.event.flag_inappro == true %>
+<div id="tagged_inappro">
+<% else %>
+<div id="tagged_appro" %>
+<% end %>
+<tr>
+<td><%= count %>.</td>
+<td><%= link_to response.event.title, :controller=>'event',:action=>'show', :id=>response.event.id%></td>
+<td><%= link_to response.event.user.display_name, :controller=>'user',:action=>'user_home', :id=>response.user.id %></td>
+<td>
+<% if response.accept==true %>
+Accepted
+<% else %>
+No Response
+<% end %>
+</td>
+<td>
+<%= response.event.time.strftime("%d%b,%Y at %I:%M %p")%>
+</td>
+<% if response.event.time > Time.now %>
+<td><%= link_to "Delete Response", :controller=>'response', :action=>'delete', :id=>response.id %></td>
+<% end %>
+</tr>
+</div>
+<% end %>
+<% count+=1%>
+
+<% end %>
+</table>

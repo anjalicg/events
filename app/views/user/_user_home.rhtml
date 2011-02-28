@@ -1,0 +1,43 @@
+<%# if logged in %>
+<% unless @user.picture.blank? %>
+<%= image_tag(url_for({:action => 'image', :id => @user.id})) -%>
+<% end %>
+<p><strong><%= @user.display_name %>
+</strong>
+<% if @user.id == session[:user].id %>
+(YOU!),
+<% end %>
+<% if @user.gender and @user.gender == "F" %>
+Female,
+<% else %>
+Male,
+<% end %>
+<% if @user.dob %>
+<%= Date.today.year - @user.dob.year %> years
+<% end %>
+</p>
+<% if @user.id==session[:user].id %>
+<p><%= link_to "Edit Profile", :controller=>'user', :action=>'edit',:id=>@user.id %></p>
+<p><%= link_to "Events created by me", :controller=>'event',:action=>'list_by_user',:user_id=>@user.id %></p>
+<p><%= link_to "Add new event", :controller=>'event',:action=>'add'%></p>
+<p><%= link_to "Events Responded by Me", :controller=>'response',:action=>'list_by_responder', :user_id=> @user.id %></p>
+<% else %>
+<p><strong>About:</strong><%= @user.about %></p>
+<p><strong>Interests:</strong><%= @user.interests %></p>
+<% end %>
+<p><strong>Joined On:</strong><%= @user.created_at.strftime("%d,%b %Y") %></p>
+<p><strong>Profile Views:</strong><%= @user.view_count %></p>
+<p><%# render :partial =>'profile_completeness'%></p>
+<% mob_auth="No" %>
+<% if @user.mobile_auth==true %>
+<% mob_auth="Yes" %>
+<% end %>
+<p>Mobile verified?:<%= mob_auth%></p>
+<% if @show_details %>
+<p><%= link_to "Events created by the user", :controller=>'event',:action=>'list_by_user',:user_id=>@user.id %></p>
+<p>Contact email: <%= @user.email%> </p>
+<p>Contact Mobile: <%= @user.mobile%> </p>
+<% end %>
+
+
+

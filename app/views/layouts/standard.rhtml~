@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="google-site-verification" content="achqgliYzt-57TT5NPB1miGVrUEdhBq4BVfxLLufyiE" />
+<meta http-equiv="Content-Type" content="text/html;.
+charset=iso-8859-1" />
+<meta http-equiv="Content-Language" content="en-us" />
+<title>Join Me</title>
+<%# stylesheet_link_tag "style" %>
+</head>
+<body id="notalone" >
+<div id="container">
+<div id="header">
+</div>
+<%= image_tag("balloons.jpeg") %>
+<p align="right"> <% unless logged_in? %>
+Welcome <strong>Guest!</strong><small>(Visitor IP: <%= request.remote_addr %>)</small>
+<small><i><%= link_to "Login/SignUp", :controller=>'user', :action=>'login' %></i></small></p>
+<% else %>
+<p align="right">Welcome <strong> <%= session[:user].display_name.capitalize %>!</strong><small>(Visitor IP: <%= request.remote_addr %>)</small>
+<%= link_to "Logout", :controller=>'user', :action=>'logout' %> </p>
+<% end %>
+<hr/>
+<div id="topbar">
+<p align="center">|<%= link_to "Home", :controller=>'main', :action=>'index' %> |
+<%= link_to "About", :controller=>'main', :action=>'aboutus' %> |
+<hr/>
+</div>
+
+<div id="sidebar" style="background-color:#FFFFEC; width:20%;float:left;border:1px solid #E6E6D8;">
+<p><% form_tag :controller=>'event', :action=>'list_by_place' do %>
+<label for="search_city">Select City:</label>
+<%= select :search, :city ,Event.all.collect {|p| p.city.capitalize}.uniq.sort %><br/>
+<%= submit_tag "Show Events" %>
+<% end %></p>
+<% if logged_in? %>
+<% unless session[:user].picture.blank? %>
+<%= image_tag url_for({:controller=>'user',:action => 'image', :id => session[:user].id}), :style=> {"width"=>":50%;border:1px solid grey;"} -%>
+<%# image_tag url_for({:controller=>'user',:action => 'image', :id => session[:user].id})-%>
+<% end %>
+<br/><small>(<%= session[:user].display_name %>,
+<% if session[:user].gender%>
+<%= session[:user].gender %>,
+<% if session[:user].dob %>
+<%= Date.today.year - session[:user].dob.year %> yrs)</small><br/>
+<% end %>
+<p><%= link_to "Edit Profile", :controller=>'user', :action=>'edit',:id=>session[:user].id %></p>
+<p><%= link_to "Events created by me", :controller=>'event',:action=>'list_by_user',:user_id=>session[:user].id %></p>
+<p><%= link_to "Add new event", :controller=>'event',:action=>'add'%></p>
+<p><%= link_to "Events Responded by Me", :controller=>'response',:action=>'list_by_responder', :user_id=>session[:user].id %></p>
+<p><%= link_to "Reset Password", :controller=>'user',:action=>'reset_password', :id=>session[:user].id%></p>
+<% end %>
+<% else %>
+<p><small><i>Please <%=link_to "Login/SignUp", :controller=>'user', :action=>'login' %> to access the services</i></small></p>
+<% end %>
+</div>
+<div id="content" style="height:10%;width:70%;float:right;margin-right:5%;border:1px solid #E6E6D8;background-color:#FFFFEC;">
+<% if flash[:notice] %>
+      <div id="status" style="color:green;font-size:small;"><%= flash[:notice] %></div>
+      <% elsif flash[:error] %>
+      <div id="errors" style="color:red;font-size:small;"><%= flash[:error] %></div>
+    <% end %>
+<%# error_messages_for 'user','event','response',:header_message=>"Please try again!!!", :message=>"Please fix the following errors and re-submit the form:" %>
+<%= yield -%>
+</div>
+
+<div id="bottom" style="clear:both;margin-left:20%;margin-right:5%;padding-top:20px;">
+<p style="">|<%= link_to "Privacy", :controller=>'main', :action=>'privacy' %> |
+<%= link_to "Terms and Conditions", :controller=>'main', :action=>'terms' %>|
+<%= link_to "Contact us", :controller=>'main', :action=>'contact' %>|
+<%= link_to "Advertise", :controller=>'main', :action=>'advertise' %>|
+<%= link_to "Submit Suggestions", :controller=>'main', :action=>'suggestions' %>|
+<%= link_to "Safety", :controller=>'main', :action=>'safety' %>|
+</p>
+</div>
+</body>
+</html>

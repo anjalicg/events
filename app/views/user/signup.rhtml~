@@ -1,0 +1,19 @@
+<h3>Sign Up</h3>
+<%= error_messages_for 'user', :header_message=>"Please try again!!!", :message=>"Please fix the following errors and re-submit the form:" %>
+<% form_tag :action=>'signup' do %>
+<p><label for user_display_name>Display Name:</label>
+<%= text_field :user, :display_name %></p>
+<p><label for user_email>Email ID:</label>
+<%= text_field :user, :email %></p>
+<p><label for user_password>Choose Password:</label>
+<%= password_field :user, :password %></p>
+<p><label for user_password_confirm>Confirm Password:</label>
+<%= password_field :user, :password_confirmation %></p>
+<p><label for user_gender>Sex:</label>
+<label for user_male>M:
+<%= radio_button :user, :gender, "M"%>
+<label for user_female>F:
+<%= radio_button :user, :gender, "F"%></p>
+<%= submit_tag "Sign Up" %>
+<% end %>
+

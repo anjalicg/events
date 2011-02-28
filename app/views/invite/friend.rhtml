@@ -1,0 +1,13 @@
+<h3> Help us spread the word</h3>
+
+<p> Any social networking site is only as good as its members. Help us spread the word and improve this application by telling all your friends about us.</p>
+<p>Note:- We promise we won't unnecessarily spam them. We will just send them an email telling them how much you have enjoyed using our website and invite them to join the fun. </p>
+<% form_tag :controller=>'invite',:action=>'friend' do %>
+<p><label for invite_name > Friend's Name: </label>
+<%= text_field :invite, :name %>
+<p><label for invite_email > Friend's Email address: </label>
+<%= text_field :invite, :email %>
+<p><label for invite_email > In your own words: </label>
+<%= text_area :invite, :mailtext, :rows=>3, :columns=>10 %>
+<%= submit_tag "Send Invitation" %>
+<% end %>

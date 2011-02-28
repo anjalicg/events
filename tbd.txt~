@@ -1,0 +1,51 @@
+events for today and tomorrow -> should it be events for today and this week? may be too huge
+ascending for list by place
+On event edit, send mail to responders
+Add statistics like :- number of views for events, number of views for profile,number of responses
+"You must be logged in to access this page"
+Reject a response, should that option be there?
+Advertise with us-> best time to contact u along with timezone
+bottom tabs-> about, advertise with us, suggestions, contact us, technical team/details,blog/news/events
+domain name?
+top tabs->testimonials
+Find someone to write "About us"
+testing strategy?? how many people, how much to pay
+
+email on event creation by newsletters, 
+email on response to event creator, as and when response happens
+email on response accepted to responder or email on response deleted to creator
+email on event change to all the responders
+
+Notify user if mail id, auth does not match?
+
+REPORT ABUSE -> should i send mail to the creator and other responders? 
+Bar user if 3 events have been tagged inappropriate?
+
+Calendar format of created and responded events., may be merge with google calender
+A response text for responses?
+
+Add safety info (from orkut)
+Accept terms check and make them accept by using check boxes and validate terms in models?
+
+
+Login error mrssage linkto create or forgot password
+On error form alignment changes
+format validation for email while account creation
+password getting saved in the form.
+save profile instead of "edit Profile"
+send response when logged out
+application logging
+add Response text
+which field is mandatory in each form submit
+Remove send response for self-event
+Previous time should not be given
+Exactly what has changed in the event edit notification
+back link and home link fopr each thing
+Remove inappropriate in respondded
+Cant make my own event inappro
+dont remove inappropriate in added by me
+
+
+
+
+

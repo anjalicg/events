@@ -1,0 +1,2 @@
+14. Invite friends
+18. Salting and hashing password before storing

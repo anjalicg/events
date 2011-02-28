@@ -1,0 +1,7 @@
+Listings.......
+<% @walles.each do |walle|%>
+<p>
+On walle.created_at <small>walle.user.display_name</small> said:<br/>
+walle.entry_text
+</p>
+<% end %>

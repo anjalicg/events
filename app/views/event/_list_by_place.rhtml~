@@ -1,0 +1,2 @@
+<p><label for="search_city">Select City:</label>
+<%= select :search, :city ,Events.all.collect {|p| p.city} %> </p>

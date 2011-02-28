@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;.
+charset=iso-8859-1" />
+<meta http-equiv="Content-Language" content="en-us" />
+<title>Join Me</title>
+<%= stylesheet_link_tag "style" %>
+</head>
+<body id="notalone">
+<div id="container">
+<div id="header">
+</div>
+<strong>
+<p>-----------------------------------------------</p>
+<p>Login IP: <%= request.remote_addr %></p>
+<% unless logged_in? %>
+<p>Welcome Guest!</p>
+<% end %>
+<p>-----------------------------------------------</p>
+</strong>
+<div id="sidebar">
+<p>-----------------------------------------------</p>
+<% unless logged_in? %>
+<% if flash[:login_error] %>
+<div id="status"><%= flash[:login_error] %></div>
+<% end %>
+<h3>Login Form: </h3>
+<%= render :partial=>'user/login' %>
+<p><%= link_to "Create a new account", :controller=>'user', :action=>'signup' %> 
+<%= link_to "Forgot Password", :controller=>'user', :action=>'recover_password' %></p>
+<% else %>
+<p>Welcome <strong> <%= session[:user].display_name %> </strong>!
+<%= link_to "Logout", :controller=>'user', :action=>'logout' %> </p>
+<% end %>
+<p>........Top Tabs..........</p>
+
+<p><%= link_to "Home", :controller=>'main', :action=>'index' %></p>
+<p><%= link_to "About", :controller=>'main', :action=>'aboutus' %></p>
+<% if session[:user] %>
+<p><%= link_to "User Home", :controller=>'user', :action=>'user_home', :id=>session[:user].id %></p>
+<% end %>
+<p>-----------------------------------------------</p>
+<% form_tag :controller=>'event', :action=>'list_by_place' do %>
+<p><label for="search_city">Select City:</label>
+<%= select :search, :city ,Event.all.collect {|p| p.city}.uniq.sort %> </p>
+<%= submit_tag "Show Events" %>
+<% end %>
+<p>-----------------------------------------------</p>
+</div>
+<div id="content">
+<% if flash[:notice] %>
+      <div id="status"><%= flash[:notice] %></div>
+      <% elsif flash[:error] %>
+      <div id="status"><%= flash[:error] %></div>
+    <% end %>
+<%= error_messages_for 'user','event' %>
+<%= yield -%>
+</div>
+<div id="bottom">
+<p>....................Bottom Tabs................</p>
+<p><%= link_to "Privacy", :controller=>'main', :action=>'privacy' %></p>
+<p><%= link_to "Terms and Conditions", :controller=>'main', :action=>'terms' %></p>
+</div>
+</body>
+</html>

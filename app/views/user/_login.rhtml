@@ -1,0 +1,7 @@
+<% form_tag :controller=>'user', :action=>'login' do %>
+<label for user_email>Email: </label>
+<%= text_field :user, :email %>
+<label for user_email>Password: </label>
+<%= password_field :user, :password %> 
+<%= submit_tag "Login"%>
+<% end %>

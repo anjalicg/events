@@ -1,0 +1,50 @@
+<% unless session[:user] %>
+<p>Please <%= link_to "Login/SignUp", :controller=>'user', :action=>'login' %> to send response to this event.</p>
+<% end %>
+<div id="event_details" style=" margin:5px; border: 1px dotted grey;width:47%; float:left;">
+<h3><%= @event.title%>
+<% if @event.user==session[:user] %>
+<%= link_to "Edit this", :controller=>'event', :action=>'edit', :id=>@event.id %>
+<% end %>
+</h3>
+<p><strong>Details:</strong><%= @event.description%></p>
+<p><strong>Other Info:</strong>
+<% if @event.extra_detail %>
+<%= @event.extra_detail%>
+<% else %>
+<small> <i> No other info </i></small>
+<% end %>
+</p>
+<p><strong>Where:</strong><%= @event.country%>,<%= @event.city%>,<%= @event.location%></p>
+<p><strong>When:</strong><%= @event.time.strftime("%e-%b-%Y at %r")%></p>
+<p><strong>Created By:</strong><%= link_to @event.user.display_name, :controller=>'user',:action=>'user_home',:id=>@event.user.id %></p>
+<p><strong>Created at:</strong><%= @event.created_at.strftime("%d,%b %Y") %></p>
+<p><strong>Viewed:</strong><%= @event.view_count %> time(s)</p>
+<% if session[:user] and !can_edit_event?(@event) %>
+<% form_tag :controller=>'response',:action=>'add',:event_id=>@event.id,:user_id=>session[:user].id do %>
+<p><label for =responses_response > Send a message to the event owner: </label><br/>
+<%= text_area :responses, :response, :rows=>3, :columns=>10 %>	
+<%= submit_tag "Send Response" %><br/>
+<% end %>
+
+<% if session[:user] and !can_edit_event?(@event) %>
+<%= link_to "Tag as Inappropriate", :controller=>'event', :action=>'inappropriate', :event_id=>@event.id %>
+<% end %>
+<% end %>
+</div>
+<% if logged_in? %>
+<div id="event_wall" style="margin:5px;border: 1px dotted grey;float:right;width:50%;">
+<%= render :partial=>"wallentry/new" , :locals=> {:wallentry=>@walle} %>
+<% if @walles.length ==0 %>
+<i>Start Planning...</i>
+<% else %>
+<p><i><%= link_to "Refresh this", :controller=>'event', :action=>'show', :id=>params[:id] %></i></p>
+<% @walles.each do |walle|%>
+<p>
+<small> <%= walle.created_at.strftime("On %d,%b %Y at %I:%M %p") %> <%= link_to walle.user.display_name, :controller=>'user', :action=>'user_home', :id=>walle.user.id %> </small> said:<br/>
+<%= walle.entry_text%>
+</p>
+<% end %>
+<% end %>
+</div>
+<% end %>

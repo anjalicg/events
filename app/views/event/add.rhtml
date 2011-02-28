@@ -1,0 +1,90 @@
+<script language="JavaScript">
+function inserterror (msg) {
+document.getElementById('error').innerHTML="";
+document.getElementById('error').innerHTML= document.getElementById('error').innerHTML + "<br>"+msg;
+}
+function all_fields(fform) {
+var canSubmit=true;
+var err="";
+var count =1;
+if (fform.event_title.value == "" ) {
+err += "<br>"+count+": Event title can not be empty"
+count++;
+}
+if (fform.event_description.value == "") {
+err += "<br>"+count+": Details can not be empty"
+count++;
+}
+if (fform.event_timezone.value == "") {
+err += "<br>"+count+": Timezone can not be empty"
+count++;
+}
+if (fform.event_country.value == "") {
+err += "<br>"+count+": Timezone can not be empty"
+count++;
+}
+if (fform.event_city.value == "") {
+err += "<br>"+count+": City can not be empty"
+count++;
+}
+if (fform.event_location.value == "") {
+err += "<br>"+count+": Area can not be empty"
+count++;
+}
+
+if (err.length > 0) {
+inserterror("Please fix the following errors and re-submit the form:-"+err);
+var canSubmit =false;
+}
+return canSubmit;
+}
+</script>
+
+<h3>New Event:</h3>
+<div id="error" style="color:red;font-size:small;width:50%;">
+<% if flash[:error_sign] %>
+<%= flash[:error_sign] %>
+<% end %>
+</div>
+<form action="/event/add" method="post" name="eventAddForm" onSubmit="return all_fields(this);">
+<table>
+<tbody>
+<tr>
+<td style="text-align:right;"><label for=event_title>Title<sup style="color:red;">*</sup>:</label></td>
+<td style="align:left;"><%= text_field :event, :title %></td> 
+</tr>
+<tr>
+<td style="text-align:right;"><label for=event_description>Details<sup style="color:red;">*</sup>:</label></td>
+<td style="align:left;"><%= text_area :event, :description,:rows=>3,:columns=>10 %></td> 
+</tr>
+<tr>
+<td style="text-align:right;"><label for=event_extra_detail>Other Info:</label></td>
+<td style="align:left;"><textarea cols="40" columns="10" id="event_extra_detail" name="event[extra_detail]" rows="3" onFocus=" if (this.value=='Extra Expenses/dress code etc.') {this.value='';}">Extra Expenses/dress code etc.</textarea></td> 
+</tr>
+<tr>
+<td style="text-align:right;"><label for=event_time>When:</label></td>
+<td style="align:left;"><%= datetime_select :event, :time, :start_year=>Time.now.year,:discard_second=>true,:minute_step=>5 %></td> 
+</tr>
+<tr>
+<td style="text-align:right;"><label for=event_timezone>Timezone<sup style="color:red;">*</sup>:</label></td>
+<td style="align:left;"><%= time_zone_select :event, :timezone, nil, :include_blank => true %></td> 
+</tr>
+<tr>
+<td style="text-align:right;"><label for=event_country>Country<sup style="color:red;">*</sup>:</label></td>
+<td style="align:left;"><%= select :event, :country, country_list %></td> 
+</tr>
+<tr>
+<td style="text-align:right;"><label for=event_city>City<sup style="color:red;">*</sup>:</label></td>
+<td style="align:left;"><%= text_field :event, :city %></td> 
+</tr>
+<tr>
+<td style="text-align:right;"><label for=event_location>Area<sup style="color:red;">*</sup>:</label></td>
+<td style="align:left;"><%= text_field :event, :location %></td> 
+</tr>
+<tr>
+<td style="text-align:right;"></td>
+<td style="align:left;"><%= submit_tag "Add Event" %></td> 
+</tr>
+</tbody>
+</table>
+</form>

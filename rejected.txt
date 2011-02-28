@@ -1,0 +1,2 @@
+10. User can request an activation email if the email did not reach them. -> rejected
+11. For the above, store the activation mail error details so that they can be displayed to the user next time he requests it, in case mail id is invalid or 			mail box was full..  -> rejected

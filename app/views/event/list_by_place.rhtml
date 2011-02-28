@@ -1,0 +1,16 @@
+<h3>Upcoming Events in <%= params[:search][:city] %></h3>
+<table>
+<tr><th>What</th><th>Where</th><th>When</th></tr>
+<% @events.reverse.each do |event|%>
+<% if event %>
+<tr><td><strong><%= link_to event.title, :controller=>'event',:action=>'show',:id=>event.id %></strong></td>
+<td><%= event.country %>,<%= event.location %></td>
+<td><%= event.time.strftime("%e-%b-%Y at %r") %></td>
+<% if event.user == session[:user] %>
+<td><%= link_to "Edit", :controller=>'event', :action=>'edit', :id=>event.id %></td>
+<td><%= link_to "Remove", :controller=>'event', :action=>'delete', :id=>event.id %></td>
+<% end %>
+<% end %>
+</tr>
+<% end %>
+</table>

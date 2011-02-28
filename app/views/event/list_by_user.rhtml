@@ -1,0 +1,50 @@
+<h3>Upcoming Events by <%=@user.display_name %></h3>
+<table>
+<tr><th>What</th><th>Where</th><th>When</th><th>Response</th></tr>
+<% @upComingevents.each do |event|%>
+<% if event %>
+<% if event.flag_inappro == true %>
+<div id="tagged_inappro">
+<% else %>
+<div id="tagged_appro" %>
+<% end %>
+<tr><td><strong><%= link_to event.title, :controller=>'event',:action=>'show',:id=>event.id %></strong></td>
+<td><%= event.country %>,<%= event.city %>, <%= event.location %></td>
+<td><%= event.time.strftime("%e-%b-%Y at %r") %></td>
+<% if event.user == session[:user] %>
+<td><%= link_to count(event.id), :controller=>'response', :action=>'list_by_event', :event_id=> event.id %></td>
+<td><%= link_to "Edit", :controller=>'event', :action=>'edit', :id=>event.id %></td>
+<td><%= link_to "Remove", :controller=>'event', :action=>'delete', :id=>event.id %></td>
+<% end %>
+<% end %>
+</tr>
+</div>
+<% end %>
+</table>
+<% if session[:user]==@user %>
+<h3>Expired Events by <%=@user.display_name %></h3>
+<table >
+<tr><th>What</th><th>Where</th><th>When</th><th>Response</th></tr>
+<% @expiredevents.each do |event|%>
+<% if event %>
+<% if event.flag_inappro == true %>
+<div id="tagged_inappro">
+<% else %>
+<div id="tagged_appro" %>
+<% end %>
+	<tr>
+	<td ><strong><%= link_to event.title, :controller=>'event',:action=>'show',:id=>event.id %></strong></td>
+	<td><%= event.country %>,<%= event.city %>, <%= event.location %></td>
+	<td><%= event.time.strftime("%e-%b-%Y at %r") %></td>
+	<% if event.user == session[:user] %>
+		<td><%= link_to count(event.id), :controller=>'response', :action=>'list_by_event', :event_id=> event.id %></td>
+		<td><%= link_to "Edit", :controller=>'event', :action=>'edit', :id=>event.id %></td>
+		<td><%= link_to "Remove", :controller=>'event', :action=>'delete', :id=>event.id %></td>
+	<% end %>
+
+<% end %>
+</tr>
+</div>
+<% end %>
+</table>
+<% end %>

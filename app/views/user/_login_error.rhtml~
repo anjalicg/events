@@ -1,0 +1,5 @@
+<span id="login_error" ><p><strong>Your login attempt was not successful. Please rectify any of the following errors and try again</strong></p>
+<span id="login_issue">You may not have created an account with us:</span> <span id="login_sol">Follow the link <%=link_to "Create a new Account", :controller=>'user',:action=>'signup' %> to join us today</span><br/>
+<span id="login_issue">Your password might be incorrect:</span> <span id="login_sol">Please retry again with correct password or follow the link <%= link_to "Forgot Password", :controller=>'user', :action=>'recover_password' %> if you have forgotten your password. </span><br/>
+<span id="login_issue">Your account might not be activated:</span> <span id="login_sol">Follow the link sent in account activation mail sent by us to activate your account. It might have been delivered to your Spam/junk folder, so check all your folders.</span><br/>
+

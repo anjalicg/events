@@ -1,0 +1,5 @@
+<p><% form_tag :controller=>'event', :action=>'list_by_place' do %>
+<p><label for="search_city">Select City:</label>
+<%= select :search, :city ,Event.all.collect {|p| p.city.capitalize}.uniq.sort %></p>
+<p style="margin-left:50px;;"><%= submit_tag "Show Events" %></p>
+<% end %></p>

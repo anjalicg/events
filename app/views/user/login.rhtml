@@ -1,0 +1,165 @@
+<script language="JavaScript">
+function inserterror (msg) {
+document.getElementById('error').innerHTML="";
+document.getElementById('error').innerHTML= document.getElementById('error').innerHTML + "<br>"+msg;
+
+}
+function enabledisablesubmit (fform) {
+
+fform.accepted_terms.checked ? fform.signup_submit.disabled = false : fform.signup_submit.disabled = true
+}
+function all_fields(fform) {
+var canSubmit=true;
+var err="";
+var count =1;
+if (fform.user_display_name.value == "" || fform.user_display_name.value.length <3 || fform.user_display_name.value.length >10) {
+err += "<br>"+count+": Display name should be of 3 to 10 characters"
+count++;
+}
+var exp_email= /^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z0-9]{2,4})+$/;
+if (!exp_email.test(fform.user_email.value)) {
+err += "<br>"+count+": Email should be a valid email address,e.g. abc@domain.com"
+count++;
+}
+if (fform.user_password.value == "" || fform.user_password.value.length <6 || fform.user_password.value.length >25) {
+err += "<br>"+count+": Password should be of 6 to 25 characters"
+count++;
+}
+if (fform.user_password.value != fform.user_password_confirmation.value) {
+err += "<br>"+count+": Password and confirmation fields should match"
+count++;
+}
+
+if (err.length > 0) {
+inserterror("Please fix the following errors and re-submit the form:-"+err);
+var canSubmit =false;
+}
+return canSubmit;
+}
+
+function checkfield (fname, fvalue) {
+switch(fname)
+{
+  case "user_display_name":
+	if (fvalue == "" || fvalue.length <3 || fvalue.length >10)
+	{
+        inserterror ("Length of Display name should not be less than 3 or more than 10 characters");
+	}
+	break;
+  case "user_email":
+	var filter = /^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z0-9]{2,4})+$/;
+	if (!filter.test(fvalue)) {
+	inserterror ("Please provide a valid email address");
+	}
+	break;
+  case "user_password":
+	if (fvalue == "" || fvalue.length <6 || fvalue.length >25)
+	{
+        inserterror ("Length of Password should not be less than 6 or more than 16 characters");
+	}
+	break;
+}
+}
+function passwordmatch (password2) {
+if (document.signupform.user_password.value !=password2) {
+inserterror("user_password", "Password does not match its confirmation");
+}
+}
+</script>
+<div style="float:left;width:40%;font-size:small;">
+<strong>Already have an account? Login</strong><br>	
+<% form_tag :controller=>'user', :action=>'login' do %>
+<table>
+<tbody>
+<tr>
+<td id="loginerror" colspan="2" style="color:red;font-size:small;width:50%;">
+<% if flash[:login_error] %>
+<%= flash[:login_error] %>
+<% end %>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;"><label for user_email>Email address: </label></td>
+<td style="align:left;"><%= text_field :user, :email ,:size=>25%></td>
+</tr>
+<tr>
+<td style="text-align:right;"><label for user_email>Password: </label></td>
+<td style="align:left;"><%= password_field :user, :password ,:size=>25%></td>
+</tr>
+<tr>
+<td>
+</td>
+<td style="align:left;">
+<small style="color:red;">Your login ip(<%=request.remote_addr%>) will be stored for security reasons</small><br/>
+<%= submit_tag "Login"%>
+</td>
+</tr>
+<tr>
+<td>
+<small><%= link_to "Forgot Password?", :controller=>'user', :action=>'recover_password' %></small>
+</td>
+</tr>
+
+</tbody>
+</table>
+<% end %>
+</div>
+<! End of login div ---!>
+<div style="float:right;width:58%;font-size:small;border-left:1px dashed #E6E6D8;padding-left:10px;">
+<strong>Or Create a new account from here</strong><br>
+<form action="/user/signup" method="post" name="signupform" onSubmit="return all_fields(this);">
+<table>
+<tbody>
+<tr>
+<td id="error" colspan="2" style="color:red;font-size:small;width:50%;">
+<% if flash[:error_sign] %>
+<%= flash[:error_sign] %>
+<% end %>
+</td>
+</tr>
+
+<tr>
+<td style="text-align:right;"><label for user_display_name>First Name and Last Name<i><small>(3-10 characters)</small></i><sup style="color:red;">*</sup>:</label></td>
+<td style="align:left;"><input id="user_display_name" name="user[display_name]" size="25" type="text" /></td>
+</tr>
+
+<tr>
+<td style="text-align:right;"><label for user_email>Email address<sup style="color:red;">*</sup>:</label></td>
+<td style="align:left;"><input id="user_email" name="user[email]" size="25" type="text" /></td>
+</tr>
+
+<tr>
+<td style="text-align:right;"><label for user_password>Password<i><small>(6-25 characters)</small></i><sup style="color:red;">*</sup>:</label></td>
+<td style="align:left;"><input id="user_password" name="user[password]" size="25" type="password" /></td>
+</tr>
+
+<tr>
+<td style="text-align:right;"><label for user_password_confirm>Password confirm<sup style="color:red;">*</sup>:</label></td>
+<td style="align:left;"><input id="user_password_confirmation" name="user[password_confirmation]" size="25" type="password" /></td>
+</tr>
+
+<tr>
+<td style="text-align:left;" colspan="2"><input id="accepted_terms" name="accepted_terms" type="checkbox" value="1" onClick="enabledisablesubmit(this.form);"/> I have read and agree to the <%= link_to "Terms and Conditions" , :controller=>'main', :action=>'terms' %> for using this website. I also agree to receive the account-related communication from JoinMe.</td>
+</tr>
+
+<tr>
+<td style="text-align:right;"><label for user_gender>Gender:</label></td>
+<td style="align:left;"><label for user_male>M:
+<%= radio_button :user, :gender,"M"%>
+<label for user_female>F:
+<%= radio_button :user, :gender, "F"%>
+</td>
+</tr>
+
+<tr>
+<td>
+</td>
+<td style="align:left;">
+<input disabled type="submit" value="Sign Up" name="signup_submit" >
+</td>
+</tr>
+
+</tbody>
+</table>
+</form>
+</div>

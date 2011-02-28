@@ -1,0 +1,6 @@
+<h3>You are reporting "<%= link_to @event_tag.title, :controller=>'event', :action=>'show', :id=>@event_tag.id %>" inappropriate content</h3>
+<% form_tag :controller=>'event',:action=>'inappropriate',:event_id=>params[:event_id] do %>
+<p><label for =event_inappro_comment>Comment:
+<%= text_area :event, :inappro_comment,:rows=>3,:columns=>10 %></p>
+<%= submit_tag "Report inappropriate content" %>
+<% end %>

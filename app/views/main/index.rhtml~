@@ -1,0 +1,73 @@
+<h3>Upcoming Events Today</h3>
+<% if @events_today.length !=0%>
+<table>
+<tr><th>What</th><th>Where</th><th>When</th></tr>
+<% @events_today.each do |event|%>
+<% if event  %>
+<tr><td><strong><%= link_to event.title, :controller=>'event',:action=>'show',:id=>event.id %></strong></td>
+<td><%= event.country %>,<%= event.city %>,<%= event.location %></td>
+<td><%= event.time.strftime("%r") %></td>
+</tr>
+<% end %>
+<% end %>
+</table>
+<% elsif @events_today_noplace.length !=0%>
+<p class="info" style="margin-left:50px;margin-bottom:10px;color:red;"><small><i>No events in <%= @location["city"] %>/ <%= @location["country"] %> today. Displaying events for all the locations<br/>
+Click to search events in <%= link_to "your location", :controller=>'event', :action=>'list_by_place' %></i></small></p>
+<table>
+<tr><th>What</th><th>Where</th><th>When</th></tr>
+<% @events_today_noplace.each do |event|%>
+<% if event  %>
+<tr><td><strong><%= link_to event.title, :controller=>'event',:action=>'show',:id=>event.id %></strong></td>
+<td><%= event.country %>,<%= event.city %>,<%= event.location %></td>
+<td><%= event.time.strftime("%r") %></td>
+</tr>
+<% end %>
+<% end %>
+</table>
+<% else %>
+<p>No Events</p>
+<% end %> 
+
+<h3>Upcoming Events Tomorrow</h3>
+<% if @events_tomorrow.length != 0 %>
+<table>
+<tr><th>What</th><th>Where</th><th>When</th></tr>
+<% @events_tomorrow.each do |event|%>
+<% if event  %>
+<tr><td><strong><%= link_to event.title, :controller=>'event',:action=>'show',:id=>event.id %></strong></td>
+<td><%= event.country %>,<%= event.city %>,<%= event.location %></td>
+<td><%= event.time.strftime("%e-%b-%Y at %r") %></td>
+</tr>
+<% end %>
+<% end %>
+</table>
+<% elsif @events_tomorrow_noplace.length !=0%>
+<p class="info" style="margin-left:50px;margin-bottom:10px;color:red;"><small><i>No events in <%= @location["city"] %>/ <%= @location["country"] %> tomorrow. Displaying events for all the locations<br/>
+Click to search events in <%= link_to "your location", :controller=>'event', :action=>'get_list_by_place' %></i></small></p>
+<table>
+<tr><th>What</th><th>Where</th><th>When</th></tr>
+<% @events_tomorrow_noplace.each do |event|%>
+<% if event  %>
+<tr><td><strong><%= link_to event.title, :controller=>'event',:action=>'show',:id=>event.id %></strong></td>
+<td><%= event.country %>,<%= event.city %>,<%= event.location %></td>
+<td><%= event.time.strftime("%r") %></td>
+</tr>
+<% end %>
+<% end %>
+</table>
+<% else %>
+<p>No Events</p>
+<% end %>
+<h3>Recently added</h3>
+<table>
+<tr><th>What</th><th>Where</th><th>When</th></tr>
+<% @latest_10.each do |event|%>
+<% if event %>
+<tr><td><strong><%= link_to event.title, :controller=>'event',:action=>'show',:id=>event.id %></strong></td>
+<td><%= event.country %>,<%= event.city %>,<%= event.location %></td>
+<td><%= event.time.strftime("%e-%b-%Y at %r") %></td> <td>....Added <%=time_ago_in_words(event.created_at)%> ago</td>
+</tr>
+<% end %>
+<% end %>
+</table>

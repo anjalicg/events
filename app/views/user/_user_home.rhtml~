@@ -1,0 +1,6 @@
+<%= if logged in %>
+<%= @user.display_name %>
+<%= link_to "Edit Profile", :controller=>'user', :action=>'edit' %>
+<%= link_to "Events created by me", :controller=>'event',:action=>'list_user',:id=>params[:user_id] %>
+<%= render :partial =>
+

@@ -1,0 +1,12 @@
+1.accept terms and conditions in model and view for signup
+2. new page for login and signup
+2. crop images before upload -> done
+3.form verification for signup
+4. If gender in profile display. Remove all redirect to user_home
+5. extra expenses/conditions in event creation
+6. Store login ip for security purposes and display message while login.
+12. Reset password link send in case of forgotten password. Reset password in profile edit. -> After that i am resetting the reset code also
+12. All event field explanation inside the text field, clear onClick. 
+12. Reset password in profile edit.
+21. Event wall
+23. Add First Name last name in user add,so that invite mails can use it or replace it with display name
