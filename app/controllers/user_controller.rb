@@ -53,7 +53,7 @@ puts "aceepted? #{params[:accepted_terms]}"
 			if @user.save
 			#session[:user]=@user
 			puts "User saved"
-		#	JoinmeMailer.deliver_newuser(@user,tempauth_code)
+			JoinmeMailer.deliver_newuser(@user,tempauth_code)
 			flash[:notice]="An account activation email has been sent to your address. Please follow the link provided with it to activate your account 				and starting using our services."
 			return if request.xhr?
 			#render :nothing=>true
