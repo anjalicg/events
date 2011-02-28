@@ -10,7 +10,7 @@ class MainController < ApplicationController
         redirect_to :controller=>'main',:action=>'index'
         return true
         else
-          render :text=>"The email you have provided is not added to our alpha-testing trusted list. Please send a mail to anjalicg2001@gmail.com, if you want to participate in our alpha tests."
+          render :text=>"<div style=\"color:red;\">The email you have provided is not added to our alpha-testing trusted list. Please send a mail to anjalicg2001@gmail.com, if you want to participate in our alpha tests."
           return true
         end
       end
