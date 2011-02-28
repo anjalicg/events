@@ -143,14 +143,16 @@ before_filter :logged_in?, :except=>[:login, :signup, :recover_password,:activat
 #	Increment view_count
 	#puts "Inside increment code, #{@user.view_count}"
 	@user.view_count +=1
+end
+
 	#puts "Inside increment code, #{@user.view_count}"
 	if @user.save
-	#puts "Saved successfully"
+	puts "Saved successfully"
 	else
-	#puts "save failed #{@user.errors}"
+	puts "save failed #{@user.errors}"
 #	@user.errors.each {|k,v|
 	#puts "#{k} <-------------->#{v}"}
-	#end
+	end
 	end
 
 	end
@@ -158,6 +160,7 @@ before_filter :logged_in?, :except=>[:login, :signup, :recover_password,:activat
 		@image=User.find(params[:id])
 		send_data @image.picture, :file_name =>"photo.jpg", :type=>@image.content_type, :disposition=>'inline'
 	end
+
 def recover_password
 
 		case request.method
@@ -179,7 +182,9 @@ def recover_password
 		end
 
 	end
-	def reset_password
+	
+  
+  def reset_password
 	if params[:email] and params[:resetcode]
 	@user=User.find(:first, :conditions=>{:email=>params[:email], :reset_code=>params[:resetcode]})
 	else
