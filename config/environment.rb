@@ -78,6 +78,7 @@ end
 ActionView::Base.field_error_proc = Proc.new { |html_tag, instance| "<span class=\"fieldWithErrors\">#{html_tag}</span>" }
 
 #ActionMailer::Base.delivery_method = :smtp
+=begin
   ActionMailer::Base.smtp_settings = {
    :address => "owa.mailseat.com",
    :port => 2525,
@@ -86,3 +87,14 @@ ActionView::Base.field_error_proc = Proc.new { |html_tag, instance| "<span class
    :user_name => "xxxxxxxxx",
    :password => "xxxxxxxxxxxxxxx",
    }
+=end
+
+ActionMailer::Base.smtp_settings = {
+  :address        => "smtp.sendgrid.net",
+  :port           => "25",
+  :authentication => :plain,
+  :user_name      => ENV['SENDGRID_USERNAME'],
+  :password       => ENV['SENDGRID_PASSWORD'],
+  :domain         => ENV['SENDGRID_DOMAIN']
+}
+  
