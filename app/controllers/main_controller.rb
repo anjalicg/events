@@ -9,13 +9,15 @@ class MainController < ApplicationController
       if trusted_list.include?(params[:alpha][:email].downcase)
         puts "USer is in trusted list"
         redirect_to :controller=>'main',:action=>'index'
+        return true
         else
           puts "user not in trusted list"
           flash[:error_sign] = "The email you have provided is not added to our alpha-testing trusted list. Please send a mail to anjalicg2001@gmail.com, if you want to participate in our alpha tests."
+          redirect_to :controller=>'main',:action=>'alpha'
+          return true
         end
       end
-      render :layout => false
-      
+      render :layout => false      
   end
   
 	def index
