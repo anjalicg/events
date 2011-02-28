@@ -6,8 +6,8 @@
 <div style="padding:2%; margin:15%; border: 2px solid black;">
 <h3 style="color:dark blue;">Eventzy (never be out of things to do...)</h3>
 <% form_tag :action=>'alpha' do %>
-<div style="color:red;"><small><%= if flash[:error] %></small></div>
-<%= flash[:error] %>
+<% if flash[:error] do %>
+<div style="color:red;"><small><%= flash[:error] %></small></div>
 <% else %>
 <div style="color:red;"><small>Please note that this application is in alpha-testing state. 
 Only <strong>pre-approved</strong> users can access the site beyond this point. 
