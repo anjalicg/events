@@ -27,8 +27,7 @@ before_filter :logged_in?
 	flash[:notice]="You have accepted the response sent by #{@response.user.display_name}"
 	JoinmeMailer.deliver_acceptresponse(@response.user, @response.event)
 	redirect_to :controller=>'response',:action=>'list_by_event',:event_id=>params[:event_id]
-	else
-	#puts "Response rejected"
+	
 	end
 	end
 
@@ -47,7 +46,8 @@ before_filter :logged_in?
 	def list_by_responder
 	@responses=Response.find(:all, :conditions=>{:user_id=>params[:user_id]})
 	#@responses.each {|r|
-	#puts r.event}
+	#puts r.event
+  #}
 	end
 
 	def list_by_event
