@@ -9,7 +9,7 @@ before_filter :logged_in?
 	if @response.save
 	#puts "Response saved for #{params[:event_id]} by #{params[:user_id]}"
 	#puts "#{@response.user.display_name}, #{@response.event.title},#{@response.event.user.email}"
-#	JoinmeMailer.deliver_addresponse(@response.user,@response.event)
+	JoinmeMailer.deliver_addresponse(@response.user,@response.event)
 	flash[:notice]= "You have successfully responded to the event. Your contact details have been sent to the event owner."
 	else
 	#puts "something went wrong in saving the response"
@@ -25,7 +25,7 @@ before_filter :logged_in?
 	if @response.update_attributes(params[:response])
 	#puts "Response accepted"
 	flash[:notice]="You have accepted the response sent by #{@response.user.display_name}"
-#	JoinmeMailer.deliver_acceptresponse(@response.user, @response.event)
+	JoinmeMailer.deliver_acceptresponse(@response.user, @response.event)
 	redirect_to :controller=>'response',:action=>'list_by_event',:event_id=>params[:event_id]
 	else
 	#puts "Response rejected"
@@ -40,7 +40,7 @@ before_filter :logged_in?
 	event_obj=@response.event
 	#puts "#{@response.user.display_name}, #{@response.event.title},#{@response.event.user.email}"
 	@response.destroy
-#	JoinmeMailer.deliver_deleteresponse(usr_obj,event_obj)
+  JoinmeMailer.deliver_deleteresponse(usr_obj,event_obj)
 	redirect_to :controller=>'response', :action=>'list_by_responder',:user_id=>user
 	end
 

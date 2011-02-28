@@ -47,9 +47,9 @@ before_filter :logged_in?, :except=>[:login, :signup, :recover_password,:activat
 		@user.accepted_terms=params[:accepted_terms]
 		@user.login_ip=@user.login_ip.to_s+request.remote_addr
 		#puts "..............................................................."
-params.each {|k,v|
+#params.each {|k,v|
 	#puts "#{k} <-------------->#{v}"
-}
+#}
 #puts "aceepted? #{params[:accepted_terms]}"
 		#puts "..............................................................."
 			if @user.save
@@ -146,9 +146,9 @@ params.each {|k,v|
 	#puts "Saved successfully"
 	else
 	#puts "save failed #{@user.errors}"
-	@user.errors.each {|k,v|
+#	@user.errors.each {|k,v|
 	#puts "#{k} <-------------->#{v}"}
-	end
+	#end
 	end
 
 	end
@@ -191,9 +191,9 @@ def recover_password
 	case request.method
 	when :post
 	@user=User.find(params[:id])
-	params.each {|k,v|
+	#params.each {|k,v|
 	#puts "#{k} <--------> #{v}"
-	}
+	#}
 	#puts "User object is #{@user}"
 	@user.reset_code=""
 	if @user.update_attributes(params[:user])

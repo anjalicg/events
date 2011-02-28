@@ -54,7 +54,7 @@ before_filter :logged_in?, :except=>[:show,:list_by_place,:list_by_user,:get_lis
 	user_email.each {|usr_email|
 	#puts "<-----------------Inside user_email.each------------------>"
 	#puts usr_email, usr_email.class,usr_email.length
-	#JoinmeMailer.deliver_eventedit(usr_email,@event, compare_event (@event_old, @event_new))
+	JoinmeMailer.deliver_eventedit(usr_email,@event, compare_event (@event_old, @event_new))
 	}
 	flash[:notice]="Event details updated successfully"
 # Write block for sending mail to event responders with the new details of the event.
@@ -93,7 +93,7 @@ before_filter :logged_in?, :except=>[:show,:list_by_place,:list_by_user,:get_lis
 	user_email.each {|usr_email|
 	#puts "<-----------------Inside user_email.each------------------>"
 	#puts usr_email, usr_email.class,usr_email.length
-#	JoinmeMailer.deliver_eventdelete(usr_email,@event)
+	JoinmeMailer.deliver_eventdelete(usr_email,@event)
 	}
 
 		#redirect_to :controller=>'user',:action=>'user_home', :id=>user_id
