@@ -46,7 +46,7 @@ before_filter :logged_in?
 
 	def list_by_responder
 	@responses=Response.find(:all, :conditions=>{:user_id=>params[:user_id]})
-	@responses.each {|r|
+	#@responses.each {|r|
 	#puts r.event}
 	end
 
