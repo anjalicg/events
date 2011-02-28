@@ -4,6 +4,12 @@ require 'strscan'
 class MainController < ApplicationController
   def alpha
     trusted_list = ["anjalicg2001@gmail.com", "sureshg.g@gmail.com"]
+    if trusted_list.include?(params[:alpha][:email].downcase)
+      puts "USer is in trusted list"
+      else
+        puts "user not in trusted list"
+      end
+      
   end
   
 	def index
