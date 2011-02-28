@@ -175,7 +175,7 @@ redirect_to :controller=>'main', :action=>'index'
 	if (event.time >= Time.now)
 	event
 	else
-	#puts "Expired event"
+	puts "Expired event"
 	end
 	}
 	#puts @events.length
