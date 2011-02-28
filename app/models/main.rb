@@ -1,3 +1,3 @@
 class Main < ActiveRecord::Base
-	act_as_mappable
+	#act_as_mappable
 end
