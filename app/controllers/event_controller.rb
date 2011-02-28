@@ -36,24 +36,24 @@ before_filter :logged_in?, :except=>[:show,:list_by_place,:list_by_user,:get_lis
 	when :post
 #	Save the changes submitted for the event.
 	if @event.user==session[:user]
-	puts "Going to update_attributes #{params[:event]} ................................."
+	#puts "Going to update_attributes #{params[:event]} ................................."
 	id=@event.id
 	if @event.update_attributes(params[:event])
 	@event_new=Event.find(id)
 	# Send mail to responders with event edit details
 	# checking with hard coded values
 	responses=Response.find(:all, :select=>:user_id, :conditions=>{:event_id=>@event.id})
-	puts responses
+	#puts responses
 	user_email=responses.collect {|y| user=User.find(y.user_id)
 	[y.user_id, user.display_name, user.email]
 	}	
-	#puts user_id
-puts ".......>"
-	puts user_email, user_email.class, user_email.length
-puts ".......>"
+	##puts user_id
+#puts ".......>"
+	#puts user_email, user_email.class, user_email.length
+#puts ".......>"
 	user_email.each {|usr_email|
-	puts "<-----------------Inside user_email.each------------------>"
-	puts usr_email, usr_email.class,usr_email.length
+	#puts "<-----------------Inside user_email.each------------------>"
+	#puts usr_email, usr_email.class,usr_email.length
 	#JoinmeMailer.deliver_eventedit(usr_email,@event, compare_event (@event_old, @event_new))
 	}
 	flash[:notice]="Event details updated successfully"
@@ -78,21 +78,21 @@ puts ".......>"
 		@event.destroy
 	flash[:notice]="Event was removed successfully"
 	responses=Response.find(:all, :select=>:user_id, :conditions=>{:event_id=>event_id})
-	puts responses
+	#puts responses
 	user_email=responses.collect {|y| user=User.find(y.user_id)
 	[y.user_id, user.display_name, user.email]
 	}	
 	@responses.each {|response|
-	puts response
+	#puts response
 	response.destroy
-	puts "After deleting response #{response}"
+	#puts "After deleting response #{response}"
 	}
-puts ".......>"
-	puts user_email, user_email.class, user_email.length
-puts ".......>"
+#puts ".......>"
+	#puts user_email, user_email.class, user_email.length
+#puts ".......>"
 	user_email.each {|usr_email|
-	puts "<-----------------Inside user_email.each------------------>"
-	puts usr_email, usr_email.class,usr_email.length
+	#puts "<-----------------Inside user_email.each------------------>"
+	#puts usr_email, usr_email.class,usr_email.length
 #	JoinmeMailer.deliver_eventdelete(usr_email,@event)
 	}
 
@@ -100,7 +100,7 @@ puts ".......>"
 		redirect_to :controller=>'main',:action=>'index'
 	else
 	flash[:error]="You can only delete events created by you"
-	puts "CANT delete"
+	#puts "CANT delete"
 	end
 	end
 	def inappropriate
@@ -123,7 +123,7 @@ redirect_to :controller=>'main', :action=>'index'
 	# link for created_by profile
 	@event=Event.find(params[:id])
 	@walles=Wallentry.find(:all, :conditions=>{:event_id=>params[:id]},:order=>"created_at DESC")
-	puts @event.flag_inappro
+	#puts @event.flag_inappro
 	if @event.flag_inappro == true
 	flash[:error]="This event is no longer available since it has been tagged inappropriate"
 	if session[:user]
@@ -160,14 +160,14 @@ redirect_to :controller=>'main', :action=>'index'
 	resp.each {|response|
 	@responses[response.event_id.to_s] +=1
 	}
-	puts @responses.each {|k,v|
-	puts "#{k} <--> #{v}"}
+	#puts @responses.each {|k,v|
+	#puts "#{k} <--> #{v}"}
 	end
 	def get_list_by_place
 	end
 	def list_by_place
 	#listing events by place
-	puts request.method
+	#puts request.method
 	case request.method
 	when :post
 	events=Event.find(:all, :conditions=>{:city=>params[:search][:city],:flag_inappro=>false},:order=>'time ASC')
@@ -175,10 +175,10 @@ redirect_to :controller=>'main', :action=>'index'
 	if (event.time >= Time.now)
 	event
 	else
-	puts "Expired event"
+	#puts "Expired event"
 	end
 	}
-	puts @events.length
+	#puts @events.length
 	end
 	end
 protected
@@ -186,18 +186,18 @@ protected
 	changes=Hash.new(0)
 	# title, description, location, city, country, time, timezone
 	event_attrib_list=["title", "description", "location", "city", "country", "time", "timezone"]
-#	puts obj_old.read_attribute("title")
+#	#puts obj_old.read_attribute("title")
 	event_attrib_list.each {|name|
 	unless obj_old.read_attribute(name) == obj_new.read_attribute(name)
 		changes[name.capitalize+": "]=obj_new.read_attribute(name).to_s+"\n"
 	end
 	}
-#	puts "The following attributes were changed"
+#	#puts "The following attributes were changed"
 #	changes.each {|k,v|
-#	puts "#{k} <-----> #{v}"
+#	#puts "#{k} <-----> #{v}"
 #	}
-#	puts ".........................End of protected function............."
-#	puts changes
+#	#puts ".........................End of protected function............."
+#	#puts changes
 	return changes
 	end
 	

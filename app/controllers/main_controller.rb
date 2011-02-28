@@ -3,11 +3,11 @@ require 'net/http'
 require 'strscan'
 class MainController < ApplicationController
 	def index
-#	puts ".................Cookies saved from before #{cookies[:city]}..................."
+#	#puts ".................Cookies saved from before #{cookies[:city]}..................."
 	# is pagination possible?
-	puts "Class of remote addr #{request.remote_addr.class}, ip: #{request.remote_addr}"
+	#puts "Class of remote addr #{request.remote_addr.class}, ip: #{request.remote_addr}"
 	@location = find_location_main(request.remote_addr)
-#	puts "After find_location_main #{@location.class}, #{@location["country"]}, #{@location["city"]}"
+#	#puts "After find_location_main #{@location.class}, #{@location["country"]}, #{@location["city"]}"
 	@latest_10=Event.find(:all, :order=>'id DESC',:limit=>10,:conditions=>{:flag_inappro=>false})
 	todayS=Time.now.strftime("%Y-%m-%d %H:%M:00")
 	todayE=Date.today.strftime("%Y-%m-%d 23:59:59")
@@ -52,12 +52,12 @@ Timeout::timeout(5) {
 		city_str=http.body.split("\n")[1].split(":")[1].split(",")[0].strip
 		location["country"]=country_str
 		location["city"]=city_str
-puts location
+#puts location
 		return location
 		end
 }
 rescue Timeout::Error
-puts "Resolving location from ip timed out................................."
+#puts "Resolving location from ip timed out................................."
 location={"country"=>"India", "city"=>"Bangalore"}
 		return location
 end

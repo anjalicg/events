@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   # from your application log (in this case, all fields with names like "password"). 
   # filter_parameter_logging :password
 def clear_errs
-puts "Inside clear flash"
+#puts "Inside clear flash"
 flash[:error]=""
 flash[:notice]=""
 end
@@ -35,7 +35,7 @@ return false
 end
 end
 def use_ssl
-puts "Use ssl"
+#puts "Use ssl"
 redirect_to :protocol=>"https://" unless (request.ssl?)
 end
 end
