@@ -21,7 +21,7 @@ puts "Picture size is #{picture_field.size}"
 	end
 
 	def validate
-		errors.add "Picture", "Image size should be less than 4KB" if picture.size >4.kilobytes
+		#errors.add "Picture", "Image size should be less than 4KB" if picture.size >4.kilobytes
 	end	
 
 
