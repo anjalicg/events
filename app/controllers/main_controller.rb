@@ -2,6 +2,10 @@
 require 'net/http'
 require 'strscan'
 class MainController < ApplicationController
+  def alpha
+    trusted_list = ["anjalicg2001@gmail.com", "sureshg.g@gmail.com"]
+  end
+  
 	def index
 #	#puts ".................Cookies saved from before #{cookies[:city]}..................."
 	# is pagination possible?
