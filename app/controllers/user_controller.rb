@@ -10,9 +10,7 @@ before_filter :logged_in?, :except=>[:login, :signup, :recover_password,:activat
 	case request.method
 	when :post
 #puts "inside login method.................................."
-	#params.each {|k,v|
-	#puts "#{k}<-->#{v}"
-  #}
+
 #	session[:user]= User.find(:first, :conditions=>{:email=>params[:user][:email],:password=>params[:user][:password],:email_auth=>true})
 	@user = User.find(:first, :conditions=>{:email=>params[:user][:email],:password=>params[:user][:password],:email_auth=>true})
 	if @user
@@ -31,7 +29,7 @@ before_filter :logged_in?, :except=>[:login, :signup, :recover_password,:activat
 
 	end
 		
-	end
+	end #login end
 	
 	def mailsent
 	end
@@ -77,12 +75,10 @@ before_filter :logged_in?, :except=>[:login, :signup, :recover_password,:activat
 
 		end
 
-	end
-	def activate
-	#puts params
-	#params.each {|k,v|
-	#puts "#{k}<-->#{v}<--->#{v.class}"
-  #}
+	end #signup end
+	
+  
+  def activate
 	@user=User.find(:first, :conditions=>{:email=>params[:email],:auth_code=>params[:newauth]})
 	if @user
 	#puts "User found and the auth key matches"
@@ -97,17 +93,18 @@ before_filter :logged_in?, :except=>[:login, :signup, :recover_password,:activat
 	flash[:error]="Error in activation. Please forward us your activation email and we will look into this matter immediately"
 	end
 
-	end
+	end  #activate end
 	def logout
 	reset_session
 	redirect_to :controller=>'main', :action=>'index'
-	end
-	def edit
+	end #logout end
+	
+  
+  def edit
 	# editing profiles
 	@user=User.find(params[:id])
 		case request.method
 		when :post
-		#puts "#{params}"
 		if @user.update_attributes(params[:user])
 		flash[:notice]="Your profile was updated successfully"
 #		redirect_to :controller=>'user', :action=>'user_home', :id=>@user.id
@@ -126,15 +123,9 @@ before_filter :logged_in?, :except=>[:login, :signup, :recover_password,:activat
 		
 		
 		end
-	end
+	end #edit end
+  
 	def user_home
-=begin
-	unless session[:user]
-	flash[:notice]="Please login to see user profile"
-	render :partial=>'login', :controller=>'user'
-	end
-=end
-	# only of logged in	
 	@user=User.find(params[:id])
 	@show_details=params[:show_details]
 	#puts ".........................................."
@@ -143,20 +134,17 @@ before_filter :logged_in?, :except=>[:login, :signup, :recover_password,:activat
 #	Increment view_count
 	#puts "Inside increment code, #{@user.view_count}"
 	@user.view_count +=1
-end
-
 	#puts "Inside increment code, #{@user.view_count}"
 	if @user.save
 	puts "Saved successfully"
 	else
 	puts "save failed #{@user.errors}"
-#	@user.errors.each {|k,v|
-	#puts "#{k} <-------------->#{v}"}
-	end
-	end
+end
 
-	end
-	def image
+	end 
+	end #user_home end
+	
+  def image
 		@image=User.find(params[:id])
 		send_data @image.picture, :file_name =>"photo.jpg", :type=>@image.content_type, :disposition=>'inline'
 	end
@@ -181,7 +169,7 @@ def recover_password
 		end
 		end
 
-	end
+	end #recover_password end
 	
   
   def reset_password
@@ -220,8 +208,12 @@ def recover_password
 			#puts @user.errors
 	end
 	end
-	end
+	end #reset password end
 	
+
+
+
+
 #=============================================================
 	protected 
 	def code_generate(email)
