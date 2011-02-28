@@ -10,8 +10,9 @@ before_filter :logged_in?, :except=>[:login, :signup, :recover_password,:activat
 	case request.method
 	when :post
 #puts "inside login method.................................."
-	params.each {|k,v|
-	#puts "#{k}<-->#{v}"}
+	#params.each {|k,v|
+	#puts "#{k}<-->#{v}"
+  #}
 #	session[:user]= User.find(:first, :conditions=>{:email=>params[:user][:email],:password=>params[:user][:password],:email_auth=>true})
 	@user = User.find(:first, :conditions=>{:email=>params[:user][:email],:password=>params[:user][:password],:email_auth=>true})
 	if @user
@@ -79,8 +80,9 @@ before_filter :logged_in?, :except=>[:login, :signup, :recover_password,:activat
 	end
 	def activate
 	#puts params
-	params.each {|k,v|
-	#puts "#{k}<-->#{v}<--->#{v.class}"}
+	#params.each {|k,v|
+	#puts "#{k}<-->#{v}<--->#{v.class}"
+  #}
 	@user=User.find(:first, :conditions=>{:email=>params[:email],:auth_code=>params[:newauth]})
 	if @user
 	#puts "User found and the auth key matches"
@@ -219,9 +221,9 @@ def recover_password
 	protected 
 	def code_generate(email)
 	code=Array.new()
-	for i in 0..50
-	code.push(rand(9))
-	end
+    for i in 0..50
+      code.push(rand(9))
+    end
 	#puts code.to_s
 	return code.to_s	
 	end
