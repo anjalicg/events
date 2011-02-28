@@ -1,8 +1,0 @@
-class MailTextInvite < ActiveRecord::Migration
-  def self.up
-	add_column :invite_friends, :mailtext , :text
-  end
-
-  def self.down
-  end
-end
