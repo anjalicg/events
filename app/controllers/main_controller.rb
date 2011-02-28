@@ -12,7 +12,7 @@ class MainController < ApplicationController
         return true
         else
           puts "user not in trusted list"
-          flash[:error_sign] = "The email you have provided is not added to our alpha-testing trusted list. Please send a mail to anjalicg2001@gmail.com, if you want to participate in our alpha tests."
+          flash[:error] = "The email you have provided is not added to our alpha-testing trusted list. Please send a mail to anjalicg2001@gmail.com, if you want to participate in our alpha tests."
           redirect_to :controller=>'main',:action=>'alpha'
           return true
         end

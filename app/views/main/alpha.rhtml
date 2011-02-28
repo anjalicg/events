@@ -6,10 +6,14 @@
 <div style="padding:2%; margin:15%; border: 2px solid black;">
 <h3 style="color:dark blue;">Eventzy (never be out of things to do...)</h3>
 <% form_tag :action=>'alpha' do %>
+<div style="color:red;"><small><%= if flash[:error] %></small></div>
+<%= flash[:error] %>
+<% else %>
 <div style="color:red;"><small>Please note that this application is in alpha-testing state. 
-Only pre-approved users can access the site beyond this point. 
+Only <strong>pre-approved</strong> users can access the site beyond this point. 
 <br/>If you want to check out this site, please send a mail to us at <strong>anjalicg2001@gmail.com</strong> and we will add your email ID to the approved list if required.
 </small></div>
+<% end %>
 <p><label for="email">Email ID:</label>
 
 <%= text_field :alpha, :email %></p>
