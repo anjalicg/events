@@ -6,7 +6,7 @@ class CreateUsers < ActiveRecord::Migration
 	t.column :dob, :date
 	t.column :gender, :string, :limit=>2
 	t.column :mobile, :string
-	t.column :picture, :binary, :limit=>3.megabytes
+	t.column :picture, :binary #, :limit=>3.megabytes
 	t.column :mobile_auth , :boolean
 	t.column :email_auth, :boolean
 	t.column :password, :string, :null=>false
